@@ -1,14 +1,19 @@
+"use client"
+
 import { Cookie } from "@/lib/cookies"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { useCart } from "@/lib/cookieCart"
 
 type Props = {
   cookie: Cookie
 }
 
 export default function CookieCard({ cookie }: Props) {
+  const addItem = useCart(state => state.addItem)
+
   return (
     <Card className="flex flex-col overflow-hidden">
       <div className="relative h-48 w-full bg-amber-50">
@@ -29,7 +34,9 @@ export default function CookieCard({ cookie }: Props) {
         <p className="text-sm text-muted-foreground">{cookie.description}</p>
       </CardContent>
       <CardFooter className="mt-auto pt-0">
-        <Button className="w-full">Add to cart</Button>
+        <Button className="w-full" onClick={() => addItem(cookie)}>
+          Add to cart
+        </Button>
       </CardFooter>
     </Card>
   )
