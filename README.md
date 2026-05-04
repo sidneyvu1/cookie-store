@@ -19,6 +19,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 2. Install dependencies
 ```bash
    pnpm install
+   # or if you don't have pnpm
+   npm install
 ```
 3. Create a `.env.local` file in the root and add your Stripe keys
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_key_here
