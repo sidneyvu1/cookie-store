@@ -6,15 +6,7 @@ import { useCart } from "@/lib/cookieCart"
 import { useState } from "react"
 import { Input } from "./ui/input"
 
-type Props = {
-  breakdown: {
-    subtotal: number
-    tax: number
-    total: number
-  }
-}
-
-export default function CheckoutForm({ breakdown }: Props) {
+export default function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
   const { total } = useCart()
@@ -27,7 +19,7 @@ export default function CheckoutForm({ breakdown }: Props) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!stripe || !elements) return
 
@@ -78,20 +70,11 @@ export default function CheckoutForm({ breakdown }: Props) {
         <PaymentElement />
       </div>
 
-       <div className="border rounded-xl p-6 flex flex-col gap-3">
-        <h2 className="font-medium mb-2">Order Summary</h2>
-        <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">Subtotal</span>
-          <span>${(breakdown.subtotal / 100).toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">Tax (8.25%)</span>
-          <span>${(breakdown.tax / 100).toFixed(2)}</span>
-        </div>
-        <div className="border-t pt-3 flex justify-between font-semibold">
-          <span>Total</span>
-          <span>${(breakdown.total / 100).toFixed(2)}</span>
-        </div>
+      <div className="border rounded-xl p-6 flex justify-between items-center">
+        <span className="font-medium">Total</span>
+        <span className="text-lg font-semibold">
+          ${(total() / 100).toFixed(2)}
+        </span>
       </div>
 
       {error && (
