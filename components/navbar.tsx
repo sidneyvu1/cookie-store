@@ -10,7 +10,9 @@ export default function Navbar() {
 
   return (
     <nav className="border-b px-6 py-4 flex items-center justify-between">
-      <Link href="/" className="font-semibold text-lg">
+      
+      <Link href="/" className="flex gap-2 font-semibold text-lg">
+        <img src="/public/logo.png" alt="logo" />
         Cookie Store
       </Link>
       <Link href="/cart">

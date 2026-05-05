@@ -1,6 +1,6 @@
 # Cookie Store
 
-A small business cookie ordering app built to learn Next.js, React, and Stripe.
+A small business cookie ordering app built to learn Next.js, React, and Stripe. I started this project because my sibling wanted to start her local cookie business, and I am hoping this can give her a start.
 
 ## Tech Stack
 
@@ -34,6 +34,11 @@ STRIPE_SECRET_KEY=your_key_here
 ## Features
 
 - Cookie catalog
-### To be Implemented
 - Cart management
 - Stripe Elements embedded checkout
+
+### To be Implemented
+- Blog Feature 
+- Cookie Preview Window
+- Improved/Custom UI
+- Admin Dashboard 

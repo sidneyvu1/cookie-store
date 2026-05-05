@@ -1,11 +1,22 @@
-theme: {
-  extend: {
-    colors: {
-      cream: "hsl(var(--cream))";
-      sand: "hsl(var(--sand))";
-      wheat: "hsl(var(--wheat))";
-      mocha: "hsl(var(--mocha))";
-      espresso: "hsl(var(--espresso))";
+import type { Config } from "tailwindcss"
+
+const config: Config = {
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        cream: "var(--cream)",
+        sand: "var(--sand)",
+        wheat: "var(--wheat)",
+        mocha: "var(--mocha)",
+        espresso: "var(--espresso)",
+      }
     }
-  }
+  },
+  plugins: [],
 }
+
+export default config

@@ -33,7 +33,7 @@ export default function CookieCard({ cookie }: Props) {
         </div>
         <p className="text-sm text-muted-foreground">{cookie.description}</p>
       </CardContent>
-      <CardFooter className="mt-auto pt-0">
+      <CardFooter className="mt-auto pt-0 border-0 bg-cream">
         <Button className="w-full" onClick={() => addItem(cookie)}>
           Add to cart
         </Button>
