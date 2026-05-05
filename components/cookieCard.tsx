@@ -16,7 +16,7 @@ export default function CookieCard({ cookie }: Props) {
 
   return (
     <Card className="flex flex-col overflow-hidden">
-      <div className="relative h-48 w-full bg-amber-50">
+      <div className="relative h-80 w-full bg-amber-50">
         <Image
           src={cookie.image}
           alt={cookie.name}
