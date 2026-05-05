@@ -1,44 +1,58 @@
 # Cookie Store
 
-A small business cookie ordering app built to learn Next.js, React, and Stripe. I started this project because my sibling wanted to start her local cookie business, and I am hoping this can give her a start.
+A cookie ordering app built for my sibling's local home bakery business, and as a way to learn Next.js, React, and Stripe end-to-end.
 
 ## Tech Stack
 
 - Next.js 16 (App Router)
 - React 19
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS v4
 - shadcn/ui
-- Stripe Elements
+- Stripe Embedded Checkout
+- Zustand (cart state)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Prerequisites
+
+- Node.js 18+
+- pnpm (`npm install -g pnpm`)
 
 ## Getting Started
 
 1. Clone the repo
+```bash
+   git clone https://github.com/sidneyvu1/cookie-store.git
+   cd cookie-store
+```
+
 2. Install dependencies
 ```bash
    pnpm install
-   # or if you don't have pnpm
-   npm install
 ```
-3. Create a `.env.local` file in the root and add your Stripe keys
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_key_here
-STRIPE_SECRET_KEY=your_key_here
+
+3. Create a `.env.local` file in the root:
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+
 4. Run the dev server
 ```bash
    pnpm dev
 ```
+
 5. Open [http://localhost:3000](http://localhost:3000)
 
 ## Features
 
-- Cookie catalog
-- Cart management
-- Stripe Elements embedded checkout
+- Cookie catalog with cart management
+- Persistent cart via localStorage
+- Stripe Embedded Checkout
+- Order confirmation with email receipt via Stripe
 
-### To be Implemented
-- Blog Feature 
-- Cookie Preview Window
-- Improved/Custom UI
-- Admin Dashboard 
+## Planned
+
+- AWS S3 for image storage
+- AWS SES for branded order emails
+- DynamoDB for order history
+- Admin dashboard
+- Cookie preview/detail page
+- Blog feature
