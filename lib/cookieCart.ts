@@ -1,6 +1,6 @@
+import { Cookie } from "@/drizzle/schema"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { Cookie } from "./cookies"
 
 export type {CartItem}
 

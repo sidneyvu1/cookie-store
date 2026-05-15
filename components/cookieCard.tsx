@@ -1,24 +1,21 @@
 "use client"
 
-import { Cookie } from "@/lib/cookies"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import Image from "next/image"
 import { useCart } from "@/lib/cookieCart"
+import { Cookie } from "@/drizzle/schema"
+import Image from "next/image"
 
-type Props = {
-  cookie: Cookie
-}
 
-export default function CookieCard({ cookie }: Props) {
+export default function CookieCard( {cookie} : {cookie: Cookie}) {
   const addItem = useCart(state => state.addItem)
 
   return (
     <Card className="flex flex-col overflow-hidden">
       <div className="relative h-80 w-full bg-amber-50">
         <Image
-          src={cookie.image}
+          src={cookie.imageUrl}
           alt={cookie.name}
           fill
           className="object-cover"
