@@ -2,14 +2,19 @@
 
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
-import { useCart } from "@/lib/cookieCart"
-import { useState } from "react"
 import { Input } from "./ui/input"
+import { createPaymentIntent } from "@/app/actions/stripe"
+import { CartItem } from "@/lib/cookieCart"
+import { useState } from "react"
 
-export default function CheckoutForm() {
+type Props = {
+  items: CartItem[]
+  total: number
+}
+
+export default function CheckoutForm({ items, total }: Props) {
   const stripe = useStripe()
   const elements = useElements()
-  const { total } = useCart()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [email, setEmail] = useState("")
@@ -19,7 +24,7 @@ export default function CheckoutForm() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
     if (!stripe || !elements) return
 
@@ -32,11 +37,25 @@ export default function CheckoutForm() {
     setIsLoading(true)
     setError(null)
 
+    const { error: submitError } = await elements.submit()
+    if (submitError) {
+      setError(submitError.message ?? "Something went wrong")
+      setIsLoading(false)
+      return
+    }
+
+    const { clientSecret } = await createPaymentIntent(total, email, items)
+    if (!clientSecret) {
+      setError("Failed to initialize payment")
+      setIsLoading(false)
+      return
+    }
+
     const { error } = await stripe.confirmPayment({
       elements,
+      clientSecret,
       confirmParams: {
         return_url: `${window.location.origin}/confirmation`,
-        receipt_email: email,
       },
     })
 
@@ -52,7 +71,6 @@ export default function CheckoutForm() {
         <h2 className="font-medium">Contact Information</h2>
         <div className="flex flex-col gap-2">
           <Input
-            className="bg-mocha focus:border-espresso"
             id="email"
             type="email"
             placeholder="Email"
@@ -73,7 +91,7 @@ export default function CheckoutForm() {
       <div className="border rounded-xl p-6 flex justify-between items-center">
         <span className="font-medium">Total</span>
         <span className="text-lg font-semibold">
-          ${(total() / 100).toFixed(2)}
+          ${(total / 100).toFixed(2)}
         </span>
       </div>
 

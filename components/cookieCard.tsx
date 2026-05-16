@@ -17,6 +17,7 @@ export default function CookieCard( {cookie} : {cookie: Cookie}) {
         <Image
           src={cookie.imageUrl}
           alt={cookie.name}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           className="object-cover"
         />
